@@ -26,7 +26,7 @@ pattern_dict = {
     "CORDEX-CMIP5": r"(?P<project_id>[^/]+)/(?P<product>[^/]+)/(?P<CORDEX_domain>[^/]+)/(?P<institute>[^/]+)/(?P<driving_institute>[^_]+)-(?P<driving_model>[^/]+)/(?P<experiment>[^/]+)/(?P<ensemble>[^/]+)/(?P<rcm_name>[^/]+)/(?P<rcm_version>[^/]+)/(?P<frequency>[^/]+)/(?P<variable>[^/]+)/(?P<version>[^/]+)/(?P<filename>(?P<variable_2>[^_]+)_(?P<CORDEX_domain_2>[^_]+)_(?P<driving_institute_2>[^_]+)-(?P<driving_model_2>[^_]+)_(?P<experiment_2>[^_]+)_(?P<ensemble_2>[^_]+)_(?P<institute_rcm_name>[^_]+)_(?P<rcm_version_2>[^_]+)_(?P<frequency_2>[^_]+)(?:_(?P<time_range>[^.]+))?\.nc)",
 }
 
-CATALOG = "catalog.csv"
+CATALOG = "CORDEX-CMIP6-JSC.csv"
 
 COLS = [
     "project_id",
