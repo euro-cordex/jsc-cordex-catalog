@@ -16,6 +16,7 @@ dependencies:
   - compliance-checker
   - cc-plugin-cc6
   - requests
+  - awscli
   - pip:
     - git+https://github.com/euro-cordex/evaltools
     - git+https://github.com/euro-cordex/py-cordex
