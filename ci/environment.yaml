@@ -1,0 +1,21 @@
+name: jsc-cordex-catalog
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - intake-esm
+  - pandas
+  - xarray
+  - cf_xarray
+  - numpy
+  - openpyxl
+  - xlsxwriter
+  - dask
+  - netcdf4
+  - aiohttp
+  - compliance-checker
+  - cc-plugin-cc6
+  - requests
+  - pip:
+    - git+https://github.com/euro-cordex/evaltools
+    - git+https://github.com/euro-cordex/py-cordex
