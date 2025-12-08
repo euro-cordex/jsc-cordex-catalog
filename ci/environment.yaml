@@ -1,11 +1,8 @@
-name: jsc-cordex
+name: jsc-cordex-catalog
 channels:
   - conda-forge
 dependencies:
   - python
-  - matplotlib
-  - seaborn
-  - regionmask
   - intake-esm
   - pandas
   - xarray
