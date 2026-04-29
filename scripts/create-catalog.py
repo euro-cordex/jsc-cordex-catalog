@@ -87,15 +87,15 @@ def parse_filepath(filename, project):
     regex = r"^/?(?:[^/]+/)*" + regex
     pattern = re.compile(regex)
 
-    result = {"mip_era": mip_era, "path": filename, "status": None}
+    basic = {"mip_era": mip_era, "path": filename, "status": None}
     match = pattern.match(filename)
 
     if not match:
         print(f"Error: Parsing failed for: {filename}")
-        result["status"] = "parsing failed"
-        return result
+        basic["status"] = "parsing failed"
+        return basic
 
-    result = match.groupdict() | result
+    result = match.groupdict() | basic
     inconsistencies = check_for_inconsistency(result)
 
     if inconsistencies:
@@ -211,10 +211,35 @@ def update_catalog(root, project):
     Returns:
     pandas.DataFrame: The updated catalog DataFrame.
     """
-    df = pd.DataFrame(create_catalog(root, project))[COLS + ["path"]]
+    df = pd.DataFrame(create_catalog(root, project))  # [COLS + ["path", "status"]]
     # print(f"writing catalog to {catalog}")
     # df.to_csv(catalog, index=False)
     return df
+
+
+def write_output(df, folder_path=None):
+    """
+    Writes the catalog to a CSV file.
+
+    Parameters:
+    df (pandas.DataFrame): The DataFrame containing the catalog data.
+    folder_path (str, optional): The folder path to save the output files. Defaults to the current working directory.
+
+    Returns:
+    None
+    """
+    if folder_path is None:
+        folder_path = os.getcwd()
+    catalog = df[df.status.isin(["OK", "inconsistent attributes in DRS"])][
+        COLS + ["path"]
+    ]
+    invalid = df[df.status != "OK"][["path", "status"]]
+    filename = os.path.join(folder_path, f"{CATALOG}")
+    catalog.to_csv(filename, index=False)
+    invalid.to_csv(os.path.join(folder_path, "failed_parsing.csv"), index=False)
+    print(f"Catalog written to {filename}")
+    print(catalog.head())
+    create_excel(filename)
 
 
 if __name__ == "__main__":
@@ -223,6 +248,4 @@ if __name__ == "__main__":
     df_CMIP5 = update_catalog(root_dic["CORDEX-CMIP5"], "CORDEX-CMIP5")
     df_CMIP6 = update_catalog(root_dic["CORDEX-CMIP6"], "CORDEX-CMIP6")
     df = pd.concat([df_CMIP5, df_CMIP6])
-    folder_path = "./"  # os.path.abspath(os.path.join(os.getcwd(), "..", ".."))
-    df.to_csv(os.path.join(folder_path, f"{CATALOG}"), index=False)
-    create_excel(os.path.join(folder_path, f"{CATALOG}"))
+    write_output(df)
