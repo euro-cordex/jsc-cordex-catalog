@@ -86,44 +86,45 @@ def parse_filepath(filename, project):
     mip_era = project.split("-")[1]
     regex = r"^/?(?:[^/]+/)*" + regex
     pattern = re.compile(regex)
+
+    result = {"mip_era": mip_era, "path": filename, "status": None}
     match = pattern.match(filename)
+
     if not match:
         print(f"Error: Parsing failed for: {filename}")
-        return {}
-    attrs = match.groupdict() | {"mip_era": mip_era}
-    if match:
-        inconsistencies = check_for_inconsistency(attrs)
-        if inconsistencies:
-            print(
-                f"Warning: parsing returns inconsistent attributes: {inconsistencies}, will use the first occurrence of each attribute."
-            )
-            print(f"Please check: {filename}")
-            # return {}
-    else:
+        result["status"] = "parsing failed"
+        return result
+
+    result = match.groupdict() | result
+    inconsistencies = check_for_inconsistency(result)
+
+    if inconsistencies:
         print(
-            f"The filepath does not match the expected pattern (will be ignored): {filename}"
+            f"Warning: parsing returns inconsistent attributes: {inconsistencies}, will use the first occurrence of each attribute."
         )
-        return {}
+        print(f"Please check: {filename}")
+        result["status"] = "inconsistent attributes in DRS"
+    else:
+        result["status"] = "OK"
+
     if mip_era == "CMIP5":
-        attrs = translate_attrs_to_CMIP6(attrs)
-    return attrs
+        result = translate_attrs_to_CMIP6(result)
+    return result
 
 
 def create_catalog(root, project):
     datasets = []
     # Define the regex pattern for the filename
-    for root, dirs, files in os.walk(root):
+    for root, _, files in os.walk(root):
         # only parse if files found
         if not files:
             continue
         for file in files:
-            if ".nc" in file:
+            if file.endswith(".nc"):
                 filename = op.join(root, file)
                 print(f"parsing {filename}")
                 metadata = parse_filepath(filename, project)
-                if metadata:
-                    metadata["path"] = filename
-                    datasets.append(metadata)
+                datasets.append(metadata)
     return datasets
 
 
@@ -199,7 +200,7 @@ def create_excel(filename):
     return xlsxfile
 
 
-def update_catalog(catalog, root, project):
+def update_catalog(root, project):
     """
     Updates the catalog with metadata from the specified root directory.
 
@@ -219,8 +220,8 @@ def update_catalog(catalog, root, project):
 if __name__ == "__main__":
     # df = update_catalog(CATALOG, root_dic[project])
     # create_excel(CATALOG)
-    df_CMIP5 = update_catalog(CATALOG, root_dic["CORDEX-CMIP5"], "CORDEX-CMIP5")
-    df_CMIP6 = update_catalog(CATALOG, root_dic["CORDEX-CMIP6"], "CORDEX-CMIP6")
+    df_CMIP5 = update_catalog(root_dic["CORDEX-CMIP5"], "CORDEX-CMIP5")
+    df_CMIP6 = update_catalog(root_dic["CORDEX-CMIP6"], "CORDEX-CMIP6")
     df = pd.concat([df_CMIP5, df_CMIP6])
     folder_path = "./"  # os.path.abspath(os.path.join(os.getcwd(), "..", ".."))
     df.to_csv(os.path.join(folder_path, f"{CATALOG}"), index=False)
