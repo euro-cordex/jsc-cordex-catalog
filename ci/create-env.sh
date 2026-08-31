@@ -4,7 +4,12 @@ file=$1
 name=$2
 
 source /mnt/CORDEX_CMIP6_tmp/software/miniforge3/etc/profile.d/conda.sh
-conda env remove -y -n $name || true
+
+# Check if environment exists before removing
+if conda env list | grep -q "^$name "; then
+    conda env remove -y -n $name
+fi
+
 conda env create -f $file -n $name
 conda activate $name
 which python
