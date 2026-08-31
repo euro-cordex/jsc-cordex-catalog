@@ -103,7 +103,7 @@ def parse_filepath(filename, project):
             f"Warning: parsing returns inconsistent attributes: {inconsistencies}, will use the first occurrence of each attribute."
         )
         print(f"Please check: {filename}")
-        result["status"] = "inconsistent attributes in DRS"
+        result["status"] = f"inconsistent attributes in DRS: {inconsistencies}"
     else:
         result["status"] = "OK"
 
