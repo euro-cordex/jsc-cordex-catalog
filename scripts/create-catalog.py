@@ -13,6 +13,7 @@ Functions:
 
 import os
 import re
+import pwd
 import pandas as pd
 from os import path as op
 
@@ -43,6 +44,7 @@ COLS = [
     "version",
     "time_range",
     "variable_id",
+    "owner",
 ]
 
 attrs_mapping = {
@@ -87,7 +89,14 @@ def parse_filepath(filename, project):
     regex = r"^/?(?:[^/]+/)*" + regex
     pattern = re.compile(regex)
 
-    basic = {"mip_era": mip_era, "path": filename, "status": None}
+    # Get file owner
+    try:
+        file_stat = os.stat(filename)
+        owner = pwd.getpwuid(file_stat.st_uid).pw_name
+    except (OSError, KeyError):
+        owner = "unknown"
+
+    basic = {"mip_era": mip_era, "path": filename, "status": None, "owner": owner}
     match = pattern.match(filename)
 
     if not match:
@@ -233,7 +242,7 @@ def write_output(df, folder_path=None):
     catalog = df[df.status.isin(["OK", "inconsistent attributes in DRS"])][
         COLS + ["path"]
     ]
-    invalid = df[df.status != "OK"][["path", "status"]]
+    invalid = df[df.status != "OK"][["path", "status", "owner"]]
     filename = os.path.join(folder_path, f"{CATALOG}")
     catalog.to_csv(filename, index=False)
     invalid.to_csv(os.path.join(folder_path, "failed_parsing.csv"), index=False)
