@@ -491,8 +491,3 @@ path,status,owner
 /mnt/CORDEX_CMIP6_tmp/sim_data/CORDEX-CMIP6/DD/EUR-12/AUTH/ERA5/evaluation/r1i1p1f1/WRF451Q/v1-r3/fx/sftlaf/v20250630/sftlaf_EUR-12_ERA5_evaluation_r1i1p1f1_AUTH-WRF451Q_v1-r3_fx.nc,parsing failed,vpavlidis
 /mnt/CORDEX_CMIP6_tmp/sim_data/CORDEX-CMIP6/DD/EUR-12/AUTH/ERA5/evaluation/r1i1p1f1/WRF451Q/v1-r3/fx/sfturf/v20250630/sfturf_EUR-12_ERA5_evaluation_r1i1p1f1_AUTH-WRF451Q_v1-r3_fx.nc,parsing failed,vpavlidis
 /mnt/CORDEX_CMIP6_tmp/sim_data/CORDEX-CMIP6/DD/EUR-12/AUTH/ERA5/evaluation/r1i1p1f1/WRF451Q/v1-r3/fx/sftlf/v20250630/sftlf_EUR-12_ERA5_evaluation_r1i1p1f1_AUTH-WRF451Q_v1-r3_fx.nc,parsing failed,vpavlidis
-/mnt/CORDEX_CMIP6_tmp/sim_data/CORDEX-CMIP6/DD/EUR-12/IDL-FCUL/ERA5/evaluation/r1i1p1f1/WRF451Q/v1-r1/1hr/sfcWind/v20240630/sfcWind_EUR-12_ERA5_evaluation_1hr_2017010100-2017123123.nc,parsing failed,rcardoso
-/mnt/CORDEX_CMIP6_tmp/sim_data/CORDEX-CMIP6/DD/EUR-12/IDL-FCUL/ERA5/evaluation/r1i1p1f1/WRF451Q/v1-r1/1hr/sfcWind/v20240630/sfcWind_EUR-12_ERA5_evaluation_1hr_2018010100-2018123123.nc,parsing failed,rcardoso
-/mnt/CORDEX_CMIP6_tmp/sim_data/CORDEX-CMIP6/DD/EUR-12/IDL-FCUL/ERA5/evaluation/r1i1p1f1/WRF451Q/v1-r1/1hr/sfcWind/v20240630/sfcWind_EUR-12_ERA5_evaluation_1hr_2019010100-2019123123.nc,parsing failed,rcardoso
-/mnt/CORDEX_CMIP6_tmp/sim_data/CORDEX-CMIP6/DD/EUR-12/IDL-FCUL/ERA5/evaluation/r1i1p1f1/WRF451Q/v1-r1/1hr/sfcWind/v20240630/sfcWind_EUR-12_ERA5_evaluation_1hr_2016010100-2016123123.nc,parsing failed,rcardoso
-/mnt/CORDEX_CMIP6_tmp/sim_data/CORDEX-CMIP6/DD/EUR-12/IDL-FCUL/ERA5/evaluation/r1i1p1f1/WRF451Q/v1-r1/1hr/sfcWind/v20240630/sfcWind_EUR-12_ERA5_evaluation_1hr_2020010100-2020123123.nc,parsing failed,rcardoso
