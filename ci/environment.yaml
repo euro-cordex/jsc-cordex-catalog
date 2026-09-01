@@ -15,6 +15,7 @@ dependencies:
   - aiohttp
   - compliance-checker
   - cc-plugin-cc6
+  - cc-plugin-wcrp
   - requests
   - awscli
   - pip:
