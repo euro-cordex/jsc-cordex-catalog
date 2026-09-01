@@ -15,9 +15,9 @@ dependencies:
   - aiohttp
   - compliance-checker
   - cc-plugin-cc6
-  - cc-plugin-wcrp
   - requests
   - awscli
   - pip:
+    - cc-plugin-wcrp
     - git+https://github.com/euro-cordex/evaltools
     - git+https://github.com/euro-cordex/py-cordex
