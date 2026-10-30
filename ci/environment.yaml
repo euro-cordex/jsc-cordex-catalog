@@ -14,7 +14,7 @@ dependencies:
   - netcdf4
   - aiohttp
   - compliance-checker
-  - cc-plugin-cc6
+  - cc-plugin-cc6=2.3.4 # https://github.com/ESGF/cc-plugin-wcrp/issues/95
   - requests
   - awscli
   - pip:
