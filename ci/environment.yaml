@@ -13,11 +13,10 @@ dependencies:
   - dask
   - netcdf4
   - aiohttp
-  - compliance-checker
-  - cc-plugin-cc6=2.3.4 # https://github.com/ESGF/cc-plugin-wcrp/issues/95
+  - compliance-checker 
   - requests
   - awscli
   - pip:
-    - cc-plugin-wcrp
+    - cc-plugin-wcrp==2.3.4 # https://github.com/ESGF/cc-plugin-wcrp/issues/95
     - git+https://github.com/euro-cordex/evaltools
     - git+https://github.com/euro-cordex/py-cordex
